@@ -14,6 +14,22 @@ use App\Models\CustomerDetailTransaction;
 
 class CustomerController extends Controller
 {
+    public function addCustomer(Request $request){
+        try{
+            $validatedData = $request->validate([
+                'name'=>['required'],
+            ]);
+            Customer::create(['name' => $validatedData['name'], 'transaction'=>0]);
+            return response()->json([
+                "status" => "success",
+                "message" => "Customer added"
+            ]);
+        }
+        catch(Exception $e){
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
+    }
+
     public function addTransaction(Request $request){
         try{
             $validatedData = $request->validate([

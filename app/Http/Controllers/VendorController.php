@@ -12,6 +12,24 @@ use App\Models\VendorDetailTransaction;
 
 class VendorController extends Controller
 {
+    public function addVendor(Request $request){
+        try{
+            $validatedData = $request->validate([
+                'name'=>['required'],
+                'address' => ['required'], 
+                'phone_number' => ['required', 'numeric'], 
+            ]);
+            Vendor::create($validatedData);
+            return response()->json([
+                "status" => "success",
+                "message" => "Vendor added"
+            ]);
+        }
+        catch(Exception $e){
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
+    }
+
     public function addTransaction(Request $request){
         try{
             $validatedData = $request->validate([

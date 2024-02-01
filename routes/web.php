@@ -23,8 +23,14 @@ Route::get('/doc', function () {
     return view('welcome');
 });
 
+// tambah vendor
+Route::post('/vendor', [VendorController::class, 'addVendor']);
+
 // tambah transaksi yang dilakukan vendor
 Route::post('/vendor/transaction', [VendorController::class, 'addTransaction']);
+
+// tambah customer
+Route::post('/customer', [CustomerController::class, 'addCustomer']);
 
 // tambah transaksi yang dilakukan customer
 Route::post('/customer/transaction', [CustomerController::class, 'addTransaction']);
